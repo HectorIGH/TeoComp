@@ -1,0 +1,31 @@
+@ Author: Hector Ivan Garcia-Hernandez
+
+In order to use this script you will need to have installed 'numpy' and 'pandas'. Pandas is used to read the file and format it accordingly and numpy is used to manipulate the states transitions as a matrix; especifically numpy is used to sort the state transitions list first using the initial states and then sorting each ordered subset using the destination state.
+
+The script will take a deterministic finite automaton in .afd file as input and will give the corresponding regular expression in two forms: the 'textbook' or 'standard' form which uses the '|' symbol as union, and the 'web' form which uses the '+' symbol as union. In both cases the script uses 'E' as the symbol for epsilon (the empty character).
+
+The .afd file MUST have the following structure: 
+- A list of the transitions between states in the form (indexOfOriginState, transition) = indexOfDestinationState, e.g. (1, a) = 2.
+- A set named F that contains all the accept states in the form F = {indexOfState, indexOfState, ...}
+
+A valid .afd file is, for example:
+(1,a) = 2
+(1,b) = 3
+(2,a) = 1
+(2,b) = 2
+(3,a) = 2
+(3,b) = 1
+F = {2,3}
+
+
+The script obtains the RegEx applying the 'State Elimination Method' (Qrip Method).
+
+Once the script is executed it will show a GUI to select the .afd file. If the selected file is formated correctly the script will start showing the list of state transitions list, with the epsilon transitions already added.
+
+In every iteration it will print the nodes left to be ripped. And for each node in the 'states to rip' set it will show which state is being ripped and both sets, the i-states and the j-states. Then it will print the current state transitions list after ripping the state. When there is no more states to rip it will show the final state transitions (which is the regular expresion).
+
+Finally it will show the regular expression in both forms, the 'standard' form and the 'web' form.
+
+
+
+

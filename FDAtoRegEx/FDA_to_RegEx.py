@@ -64,19 +64,20 @@ print(np.matrix(qs))
 istates = [i for i in range(0, max + 1)]
 jstates = [i for i in range(1, max + 2)]
 statesQrip = [i for i in range(1, max + 1)]
-print("States to rip:", statesQrip)
+#print("States to rip:", statesQrip)
 #print("States to be i", istates)
 #print("States to be j", jstates)
 
 while len(statesQrip):
+    print("\nStates to rip:", statesQrip)
     qrip = statesQrip.pop(0)
     print("Ripping node:", qrip)
     istates.remove(qrip)
     print("i-states:", istates)
     jstates.remove(qrip)
     print("j-states:", jstates)
-    print("Current states transitions:")
-    print(np.matrix(qs))
+    #print("Current states transitions:")
+    #print(np.matrix(qs))
     maux = []
     for i in istates:
         for j in jstates:
@@ -147,14 +148,16 @@ while len(statesQrip):
                maux.append([i, regex, j])
                
     qs = maux
+    print("Current states transitions:")
+    print(np.matrix(qs))
 
-print("Final state transitions")
+print("\nFinal state transitions")
 print(qs)
-print("RegEx in standar form:")
+print("\nRegEx in standard form:")
 print(qs[-1][1])
-print("RegEx in \"web\" form:")
+print("\nRegEx in \"web\" form:")
 print(qs[-1][1].replace("|", "+"))
-input("Press enter to exit")
+input("\Press enter to exit")
 
 
 
