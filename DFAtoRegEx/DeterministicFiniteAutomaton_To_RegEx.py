@@ -31,7 +31,7 @@ e = input("Input the symbol to be used as 'epsilon': ")
 # Auxiliar array
 states = [[] for i in range(len(df))]
 
-# Sieving garbage data
+# Sieving not useful data
 for row in range(len(df)):
     for i in range(len(df.iloc[row])):
         if (type(df.iloc[row][i]) == type('F') or (not np.isnan(df.iloc[row][i]))):
