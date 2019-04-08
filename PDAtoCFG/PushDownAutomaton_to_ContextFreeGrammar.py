@@ -28,32 +28,56 @@ for i in range(len(dfN.iloc[0])):
 print("@Author: Hector Ivan Garcia-Hernandez\n")
 
 # Auxiliar array
-states = [[] for i in range(len(df))]
+transitions = [[] for i in range(len(df))]
 
 # Sieving not useful data
 for row in range(len(df)):
     for i in range(len(df.iloc[row])):
         if (type(df.iloc[row][i]) == type('F') or (not np.isnan(df.iloc[row][i]))):
-            states[row].append(df.iloc[row][i])
+            transitions[row].append(df.iloc[row][i])
 
 pila = []
 for row in range(len(df)):
-    if (not (states[row][-1] in pila)):
-        pila.append(states[row][-1])
+    if (not (transitions[row][-1] in pila)):
+        pila.append(transitions[row][-1])
 
-nodos = []
+states = []
 for row in range(len(df)):
-    if (not (states[row][0] in nodos)):
-        nodos.append(states[row][0])
-nodos += finales
+    if (not (transitions[row][0] in states)):
+        states.append(transitions[row][0])
+states += finales
+initialState = states[0]
 
+step1 = []
+for f in finales:
+    step1.append("S -> <" + initialState + ", " + "\\, " + f + ">")
+step2 = []
+for p in states:
+    step2.append("<" + p + ", \\, " + p + "> -> \\")
+step3 = []
+for transition in transitions:
+    if (transition[2] != '\\'):
+        for r in states:
+            step3.append("<" + transition[0] + ", " + transition[2] + ", " + r + "> -> "
+                         + transition[1] + "<" + transition[3] + ", " + transition[-1] + ", " + r + ">")
+step4 = []
+for transition in transitions:
+    if (transition[2] == '\\'):
+        for w in pila:
+            for k in states:
+                for r in states:
+                    step4.append("<" + transition[0] + ", " + w + ", " + r + "> -> " + transition[1] + "<" + transition[3] + ", "
+                                 + transition[-1] + ", " + k + "><" + k + ", " + w + ", " + r + ">")
+            
 
-
-print(states)
-print(finales)
-print(pila)
-print(nodos)
-
+print("From step 1:\n")
+print(np.matrix(step1).reshape((-1,1)))
+print("\nFrom step 2:\n")
+print(np.matrix(step2).reshape((-1,1)))
+print("\nFrom step 3:\n")
+print(np.matrix(step3).reshape((-1,1)))
+print("\nFrom step 4:\n")
+print(np.matrix(step4).reshape((-1,1)))
 
 
 
