@@ -70,18 +70,24 @@ for transition in transitions:
                                  + transition[-1] + ", " + k + "><" + k + ", " + w + ", " + r + ">")
             
 
+def printing(matrix):
+    for a in matrix:
+        print(a + "\n")
+
 print("From step 1:\n")
-print(np.matrix(step1).reshape((-1,1)))
+#print(np.matrix(step1).reshape((-1,1)))
+printing(step1)
 print("\nFrom step 2:\n")
-print(np.matrix(step2).reshape((-1,1)))
+#print(np.matrix(step2).reshape((-1,1)))
+printing(step2)
 print("\nFrom step 3:\n")
-print(np.matrix(step3).reshape((-1,1)))
+#print(np.matrix(step3).reshape((-1,1)))
+printing(step3)
 print("\nFrom step 4:\n")
-print(np.matrix(step4).reshape((-1,1)))
+#print(np.matrix(step4).reshape((-1,1)))
+printing(step4)
 
-
-
-
+input("\nPress enter to exit")
 
 
 

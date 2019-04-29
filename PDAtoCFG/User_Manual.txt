@@ -1,33 +1,28 @@
 @ Author: Hector Ivan Garcia-Hernandez
 
-In order to use this script you will need to have installed 'numpy' and 'pandas'. Pandas is used to read the file and format it accordingly. Numpy is used to manipulate the states transitions as a matrix; especifically is used to sort the state transitions list, first using the initial states and then sorting each ordered subset using the destination state.
-
-The script will take a deterministic finite automaton in .afd file as input and will give the corresponding regular expression as output in two formats: the 'textbook' or 'standard' format which uses the '|' symbol as union, and the 'web' format which uses the '+' symbol as union.
-
-The .afd file MUST have the following structure: 
-- A list of the transitions between states in the form (indexOfOriginState, transition) = indexOfDestinationState, e.g. (1, a) = 2.
-- A set named F that contains all of the accept states in the form F = {indexOfState, indexOfState, ...}.
-- Each state must be labeled as a number. And each transition must be not a number.
-
-A valid .afd file is, for example:
-(1,a) = 2
-(1,b) = 3
-(2,a) = 1
-(2,b) = 2
-(3,a) = 2
-(3,b) = 1
-F = {2,3}
-
-For the user convenience, the script comes along with several deterministic finite automaton already translated in this file format.
-
-The script obtains the RegEx applying the 'State Elimination Method' (Qrip Method).
-
-Once the script is executed it will show a GUI to select the .afd file. If the selected file is formated correctly the script will ask you to input he symbol to use as 'epsilon' (the empty character) then it will show the state transitions list, with the epsilon transitions already added.
-
-Immediately, it will start a loop, and in every iteration it will print the states left to be ripped. And for each node in the 'states to rip' set it will show which state is being ripped and both sets: the i-states and the j-states. Then it will print the current state transitions list after ripping the state. When there is no more states to rip it will show the final state transitions (which is the regular expresion). The states are ripped in order, starting from 1.
-
-Finally it will show the regular expression in both formats, the 'standard' and the 'web' format.
+In order to use this script you will need to have installed 'numpy' and 'pandas'. Pandas is used to read the file and format it accordingly. Numpy is used to present the results as a matrix; it is also used to validate if the character read is NaN or a number.
 
 
+The script will take a pushdown automaton in .ap file as input and will give the corresponding context free grammar as output. It will output the results of every and each of the four steps in order.
 
+The .ap file MUST have the following structure: 
+- A list of the transitions between states in the form (nameOfOriginState, symbolReadFromString, symbolToPopFromStack; nameOfTargetState, symbolToPushToStack).
+- A set named F that contains all of the accept states in the form F = {nameOfState, nameOfState, ...}.
+- The lambda symbol is represented by '\', without the quotes.
+
+A valid .ap file is, for example:
+(i,c,\;g,c)
+(g,b,\;g,\)
+(g,c,c;h,\)
+F = {h}
+
+For the user convenience, the script comes along with a pushdown automaton already translated in this file format.
+
+Once the script is executed it will show a GUI to select the .ap file. If the selected file is formated correctly the script will start to perform the four steps in order to obtain the CFG.
+
+The script performs the four steps completely before presenting results. In other words, the results are printed only after the whole computation is done.
+
+The script will print "From step i:", with i matching the step performed, and then it will print the list of production rules that were generated.
+
+Finally, it will ask you to press enter to exit.
 
